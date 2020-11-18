@@ -10,7 +10,7 @@ RUN apt-get update && \
 # Install Google Chrome
 RUN apt-get update && \
     wget --quiet https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    (dpkg --install google-chrome-stable_current_amd64.deb || apt-get --fix-broken --yes install) && \
+    (dpkg --install google-chrome-stable_current_amd64.deb || DEBIAN_FRONTEND=noninteractive apt-get --fix-broken --yes install) && \
     rm google-chrome-stable_current_amd64.deb && \
     sed -i 's|HERE/chrome"|HERE/chrome" --disable-setuid-sandbox --no-sandbox|g' "/opt/google/chrome/google-chrome" && \
     google-chrome --version && \
